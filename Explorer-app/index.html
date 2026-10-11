@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Explorer App</title>
+  </head>
+  <body>
+    <header class="bg-primary">
+      <div class="mx-auto max-w-6xl px-md py-md sm:px-lg lg:px-lg">
+        <div class="flex items-center justify-between gap-md">
+          <h1 class="font-display text-3xl text-white sm:text-4xl lg:text-5xl">Explorer App</h1>
+
+          <div class="flex items-center gap-sm">
+            <a
+              href="#"
+              aria-label="Perfil de usuario"
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white transition-all duration-150 hover:bg-white/25 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-12 sm:w-12"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-6 w-6">
+                <circle cx="12" cy="8" r="3.5" />
+                <path d="M4.5 19.5c1.5-3.5 4.5-5.5 7.5-5.5s6 2 7.5 5.5" stroke-linecap="round" />
+              </svg>
+            </a>
+
+            <button
+              id="menu-toggle"
+              type="button"
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-white transition-all duration-150 hover:bg-white/15 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:hidden"
+              aria-controls="main-menu"
+              aria-expanded="false"
+              aria-label="Abrir menú"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <nav
+          id="main-menu"
+          aria-label="Navegación principal"
+          class="hidden border-t border-white/15 pt-sm pb-xs md:mt-sm md:block md:border-0 md:pb-0 md:pt-0"
+        >
+          <ul class="flex flex-col gap-xs md:flex-row md:items-center md:gap-md">
+            <li>
+              <a
+                href="index.html"
+                aria-current="page"
+                class="block rounded-md px-sm py-xs font-semibold text-white transition-colors hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a
+                href="#acerca"
+                class="block rounded-md px-sm py-xs font-semibold text-white/85 transition-colors hover:bg-white/15 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Acerca de
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-md py-lg sm:px-lg">
+    <section id="home-view">
+      <section aria-label="Buscar país">
+        <form role="search" class="mb-lg">
+          <label for="country-search" class="sr-only">Buscar país</label>
+          <div class="relative">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="pointer-events-none absolute left-md top-1/2 h-5 w-5 -translate-y-1/2 text-primary"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m21 21-4.3-4.3" stroke-linecap="round" />
+            </svg>
+            <input
+              id="country-search"
+              type="search"
+              placeholder="Buscar país"
+              class="w-full rounded-full border border-border bg-surface py-md pl-12 pr-md font-semibold text-text-primary shadow-sm outline-none transition-colors duration-200 placeholder:font-semibold placeholder:text-primary hover:border-primary/50 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/40"
+            />
+          </div>
+        </form>
+
+        <div class="mb-lg">
+          <label for="region-filter" class="sr-only">Filtrar por región</label>
+          <select
+            id="region-filter"
+            class="rounded-2xl border border-border bg-primary px-lg py-sm font-semibold text-white outline-none transition-all duration-150 hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <option value="">Todas las regiones</option>
+            <option value="Americas">América</option>
+            <option value="Europe">Europa</option>
+            <option value="Asia">Asia</option>
+            <option value="Africa">África</option>
+            <option value="Oceania">Oceanía</option>
+            <option value="Antarctic">Antártida</option>
+          </select>
+        </div>
+      </section>
+
+      <section aria-labelledby="explore-heading">
+        <h2 id="explore-heading" class="mb-md font-display text-(length:--font-page-title) text-text-primary">
+          Explorar países
+        </h2>
+
+        <section
+          id="countries-container"
+          aria-label="Lista de países"
+          aria-live="polite"
+          class="grid grid-cols-1 gap-md sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        >
+          <p class="col-span-full text-text-secondary">Cargando países…</p>
+        </section>
+      </section>
+
+      <section id="acerca" aria-labelledby="acerca-heading" class="mt-lg border-t border-border pt-lg">
+        <h2 id="acerca-heading" class="mb-sm font-display text-2xl text-text-primary sm:text-3xl">Acerca de</h2>
+        <p class="max-w-2xl text-text-secondary">
+          Explorer App es un proyecto académico para explorar información básica de países por continente,
+          construido con Tailwind CSS v4 a partir de un diseño propio realizado en Figma.
+        </p>
+      </section>
+    </section>
+
+    <section id="detail-view" aria-label="Detalle del país" aria-live="polite" hidden></section>
+    </main>
+
+    <footer class="border-t border-border py-md text-center text-sm text-text-secondary">
+      <p>Explorer App — Javier Barahona</p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
