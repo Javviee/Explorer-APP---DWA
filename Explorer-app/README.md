@@ -12,13 +12,22 @@ No se utilizó el JSON de contingencia facilitado por la docente: la aplicación
 
 ## Cómo ejecutar el proyecto
 
-### 1. Instalar dependencias
+> **Importante:** el proyecto vive dentro de la carpeta `Explorer-app/` del repositorio, no en la raíz. Todos los comandos siguientes deben ejecutarse desde ahí.
+
+### 1. Clonar el repositorio y entrar a la carpeta del proyecto
+
+```bash
+git clone https://github.com/Javviee/Explorer-APP---DWA.git
+cd Explorer-APP---DWA/Explorer-app
+```
+
+### 2. Instalar dependencias
 
 ```bash
 pnpm install
 ```
 
-### 2. Configurar la API key
+### 3. Configurar la API key
 
 Crea un archivo `.env` en la raíz del proyecto con tu propia key de REST Countries:
 
@@ -26,7 +35,7 @@ Crea un archivo `.env` en la raíz del proyecto con tu propia key de REST Countr
 VITE_REST_COUNTRIES_API_KEY=tu_api_key_aquí
 ```
 
-### 3. Levantar el servidor de desarrollo
+### 4. Levantar el servidor de desarrollo
 
 ```bash
 pnpm dev
@@ -34,7 +43,7 @@ pnpm dev
 
 Abre la URL que indique la terminal (por defecto `http://localhost:5173`).
 
-### 4. Build de producción
+### 5. Build de producción
 
 ```bash
 pnpm build
