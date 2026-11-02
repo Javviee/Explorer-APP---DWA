@@ -4,6 +4,14 @@ Aplicación para explorar información de países: búsqueda por nombre, filtro 
 
 Esta es la **versión Vanilla TypeScript** del proyecto.
 
+## Demo en producción
+
+**https://explorer-app-dwa.vercel.app**
+
+Desplegada en Vercel desde la rama `main` del repositorio.
+
+![Explorer App en producción](docs/produccion.png)
+
 ## Fuente de datos
 
 [REST Countries API v5](https://restcountries.com/docs) (`https://api.restcountries.com/countries/v5`). La petición se autentica con una API key enviada en el header `Authorization: Bearer`, y se pagina con `limit`/`offset` hasta obtener el catálogo completo de países.
@@ -61,10 +69,27 @@ pnpm build
 
 Genera la carpeta `dist/` lista para desplegar.
 
+### 6. Probar la versión construida
+
+```bash
+pnpm preview
+```
+
+Sirve el contenido de `dist/` (normalmente en `http://localhost:4173`) para comprobar la versión de producción en local.
+
+### Variables de entorno
+
+| Variable | Descripción |
+|---|---|
+| `VITE_REST_COUNTRIES_API_KEY` | API key de REST Countries. Plantilla en `.env.example`, sin valor real. |
+
+En Vercel se configura en **Project Settings → Environment Variables** (Production y Preview). Si cambias una variable después del build, genera un nuevo deployment.
+
 ## Estructura de carpetas
 
 ```
 Explorer-app/
+├── .env.example            Plantilla de variables de entorno (sin valores reales)
 ├── index.html              Punto de entrada único (SPA)
 ├── public/
 │   ├── favicon.svg
@@ -110,3 +135,19 @@ Explorer-app/
 - TypeScript (Vanilla, sin frameworks de UI)
 - [Tailwind CSS v4](https://tailwindcss.com/) (`@tailwindcss/vite`), Design Tokens vía `@theme`
 - [REST Countries API v5](https://restcountries.com/docs)
+
+## Flujo de trabajo y despliegue (GitHub Flow + Vercel)
+
+- `main` es la rama de producción y está protegida: los cambios llegan mediante Pull Request.
+- Cada PR genera una preview en Vercel que se revisa antes de integrar.
+- Al integrar en `main`, Vercel despliega a producción (URL en la sección *Demo en producción*).
+- Los commits siguen la convención Conventional Commits (`feat:`, `fix:`, `refactor:`, `docs:`).
+- PR de S19 integrado: [#2 docs: agregar .env.example y documentar su uso en el README](https://github.com/Javviee/Explorer-APP---DWA/pull/2)
+
+## Limitaciones conocidas
+
+- **Restricción de orígenes en la API key:** la key solo responde a los dominios listados en *CORS Allowed Origins* de REST Countries. Cada dominio nuevo (por ejemplo, la preview de una rama) debe agregarse manualmente; de lo contrario la API responde `403` y la app muestra el estado de error.
+- **La key es visible en el navegador:** las variables `VITE_*` se incluyen en el código del cliente, por lo que se protege restringiendo la key por dominio, no ocultándola.
+- **Cuota de la API:** el plan gratuito tiene un límite mensual de peticiones y cada carga completa del catálogo realiza varias peticiones paginadas (sin caché). Si se agota la cuota, la app mostrará el estado de error.
+- **Datos incompletos de la API:** algunos territorios no tienen bandera o código alfa-2 (por ejemplo, Abkhazia); se muestra una imagen de respaldo y la tarjeta indica "Detalle no disponible".
+- **Detalle de país:** los países fronterizos se muestran como códigos alfa-3 (por ejemplo, `GTM`), y monedas e idiomas aparecen tal como los devuelve la API (en inglés).
