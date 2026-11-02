@@ -29,11 +29,21 @@ pnpm install
 
 ### 3. Configurar la API key
 
-Crea un archivo `.env` en la raíz del proyecto con tu propia key de REST Countries:
+Copia el archivo de ejemplo `.env.example` como `.env` (en la misma carpeta, junto a `package.json`):
+
+```bash
+cp .env.example .env
+```
+
+En Windows PowerShell: `Copy-Item .env.example .env`.
+
+Luego edita `.env` y reemplaza el valor ficticio por tu propia key de REST Countries:
 
 ```
-VITE_REST_COUNTRIES_API_KEY=tu_api_key_aquí
+VITE_REST_COUNTRIES_API_KEY=tu_api_key_aqui
 ```
+
+El archivo `.env` está en `.gitignore` y no se sube al repositorio. Ten en cuenta que las variables `VITE_*` quedan expuestas en el navegador, por lo que no son un almacén de secretos: en REST Countries restringe la key a tus dominios (CORS Allowed Origins).
 
 ### 4. Levantar el servidor de desarrollo
 
